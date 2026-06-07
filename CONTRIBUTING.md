@@ -1,5 +1,7 @@
 # Contributing to SuperBrowser
 
+Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before contributing.
+
 Thank you for contributing to SuperBrowser. This guide explains how to set up the project, propose work, submit pull requests, and follow the expectations for GSSoC contributions.
 
 SuperBrowser combines a FastAPI backend with a React and Electron frontend to provide AI-assisted search, browsing context, and multi-engine search results. Please keep contributions focused, tested, and easy for maintainers to review.
@@ -14,7 +16,6 @@ SuperBrowser combines a FastAPI backend with a React and Electron frontend to pr
 - Be respectful in issue comments, reviews, and maintainer discussions.
 
 ## Before You Start
-
 1. Read the issue description and existing comments.
 2. Check open pull requests to avoid duplicate work.
 3. Comment with a clear implementation approach.
@@ -22,6 +23,7 @@ SuperBrowser combines a FastAPI backend with a React and Electron frontend to pr
 5. Create a branch from the latest main branch.
 
 Maintainers do not assign issues only on a first-come-first-served basis. A strong proposal should describe the files you expect to touch, the design choice, edge cases, and any expected risks.
+
 
 If a maintainer asks you to share the approach by email, use `jeetpandya2006@gmail.com`.
 

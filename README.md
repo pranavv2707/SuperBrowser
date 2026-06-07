@@ -300,6 +300,10 @@ frontend setup, required `.env` keys, branch naming, PR descriptions, GSSoC
 labels, and code style.
 
 ---
+## ⚖️Code of Conduct
+This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
+
+
 
 ## 📄 License
 
