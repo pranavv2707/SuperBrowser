@@ -423,7 +423,12 @@ async def chat_with_context(
     # Build the prompt payload list for Groq API
     groq_messages = []
     for msg in recent_history:
-        groq_messages.append({"role": msg["role"], "content": msg["content"]})
+        content = msg["content"] or ""
+        # Truncate very long messages to prevent Groq token limit overflow
+        # 4000 characters is ~1000 tokens, which keeps the 10-message history safe
+        if len(content) > 4000:
+            content = content[:4000] + "\n[Content truncated to prevent token overflow...]"
+        groq_messages.append({"role": msg["role"], "content": content})
 
     # Build context summary (browsing queries/results/pages)
     # If app_session_id is provided, retrieve its context. Otherwise fallback to session_id.
