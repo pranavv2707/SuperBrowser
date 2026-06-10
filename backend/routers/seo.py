@@ -14,6 +14,9 @@ from services.serpapi_search import (
     search_google_serpapi,
 )
 
+from utils.cache import cache_key, get_cached, set_cached
+
+
 router = APIRouter()
 
 
@@ -72,7 +75,13 @@ async def get_seo(q: str = Query(default=None)):
             content={"error": "query param q is required"}
         )
 
-    print(f"[seo] searching with natural CDN delivery")
+    key = cache_key(q, "all", "seo")
+    cached = get_cached(key)
+    if cached is not None:
+        print(f"[seo] cache HIT for query={q!r}")
+        return JSONResponse(content=cached, headers={"X-Cache": "HIT"})
+
+    print(f"[seo] cache MISS - searching with natural CDN delivery")
 
     google_results, bing_results, ddg_results = await asyncio.gather(
         _search_with_immediate_fallback(q, "google", search_google_serpapi, scrape_google),
@@ -89,7 +98,12 @@ async def get_seo(q: str = Query(default=None)):
     
     shopping = google_results.get("shopping", [])
     
-    return {
+    results = {
         "results": ranked_organic,
         "shopping_results": shopping
     }
+
+    set_cached(key, results)
+    return JSONResponse(content=results, headers={"X-Cache": "MISS"})
+
+
